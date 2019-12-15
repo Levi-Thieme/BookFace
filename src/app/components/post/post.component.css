@@ -1,0 +1,19 @@
+.post {
+    background: #555;
+    border: solid 1px black;
+    text-align: left;
+    color: black;
+}
+
+.post-title {
+    font-size: 16;
+    background: #333;
+}
+
+.post-content {
+    font-size: 12;
+}
+
+.comment-container > .comment {
+    color: lightblue;
+}

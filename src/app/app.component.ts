@@ -7,4 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Bookface';
+  createPost(event) {
+    console.log(event);
+  }
 }

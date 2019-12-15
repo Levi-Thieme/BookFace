@@ -1,0 +1,12 @@
+<div class="post">
+    <div class="post-title">{{post.username}} posted on {{post.createdOn}}</div>
+    <div class="post-content">{{post.content}}</div>
+    <div *ngIf="post.comments.length > 0">
+        Comments:
+        <div class="comment-container">
+            <div class="comment" *ngFor="let comment of post.comments">
+                {{comment.username}} - {{comment.content}}
+            </div>
+        </div>
+    </div>
+</div>
