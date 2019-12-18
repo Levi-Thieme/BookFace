@@ -18,7 +18,7 @@ import { CreatePostComponent } from './components/create-post/create-post.compon
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

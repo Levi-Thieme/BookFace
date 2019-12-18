@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
+import { PostService } from './services/post.service';
+import { Post } from './shared/models/post';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +9,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Bookface';
-  createPost(event) {
-    console.log(event);
+
+  constructor(private postService: PostService) {
+  }
+
+  ngOnInit() {
+
   }
 }

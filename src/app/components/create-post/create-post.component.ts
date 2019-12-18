@@ -1,6 +1,7 @@
-import { Component, Output } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { EventEmitter } from 'protractor';
+import { PostService } from 'src/app/services/post.service';
+import { Post } from 'src/app/shared/models/post';
 
 @Component({
   selector: 'app-create-post',
@@ -8,13 +9,17 @@ import { EventEmitter } from 'protractor';
   styleUrls: ['./create-post.component.css']
 })
 export class CreatePostComponent {
-  @Output() submitEmitter = new EventEmitter();
   profileForm = new FormGroup({
     username: new FormControl('', Validators.required),
     contents: new FormControl('', Validators.required),
   });
 
+  constructor(private postService: PostService) {
+
+  }
+
   onSubmit() {
-    this.submitEmitter.emit(this.profileForm.value);
+    const newPost = new Post(this.profileForm.value.username, new Date().toDateString(), this.profileForm.value.contents, []);
+    this.postService.addPost(newPost);
   }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Post } from "../../shared/models/post";
 import { PostComponent } from '../post/post.component';
 import {PostService} from "../../services/post.service";
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-post-feed',
@@ -9,21 +10,27 @@ import {PostService} from "../../services/post.service";
   styleUrls: ['./post-feed.component.css']
 })
 export class PostFeedComponent implements OnInit {
-  @Input() postCreated = new Input();
-  posts: Post[];
+  private createdPostSubscription: Subscription;
+  private posts: Post[];
 
   constructor(private postService : PostService) {
-    this.posts = postService.getPosts();
+    this.posts = [];
+    //subscribes to any posts created by the user
+    this.createdPostSubscription = postService.getCreatedPosts()
+      .subscribe(createdPost => this.posts.push(createdPost));
   }
 
   ngOnInit() {
   }
 
-  addPost(post: Post) {
-    this.posts.push(post);
+  ngOnDestroy() {
+    this.createdPostSubscription.unsubscribe();
   }
 
-  removePost(postToRemove: Post) {
-    this.posts = this.posts.filter(post => post != postToRemove);
+  /**
+   * Returns the posts array.
+   */
+  public getPosts(): Post[] {
+    return this.posts;
   }
 }

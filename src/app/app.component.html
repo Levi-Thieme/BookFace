@@ -1,5 +1,5 @@
 <div>
   <header>Welcome to {{title}}</header>
-  <app-create-post (onSubmit)="createPost($event)"></app-create-post>
-  <app-post-feed></app-post-feed>
+  <app-create-post (onCreate)="postCreated($event)"></app-create-post>
+  <app-post-feed (onPostCreated)="addPost($event)"></app-post-feed>
 </div>
